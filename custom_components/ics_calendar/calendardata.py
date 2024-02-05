@@ -104,6 +104,7 @@ class CalendarData:  # pylint: disable=R0902
         password: str,
         user_agent: str,
         accept_header: str,
+        custom_additional_headers: str
     ):
         """Set a user agent, accept header, and/or user name and password.
 
@@ -123,6 +124,8 @@ class CalendarData:  # pylint: disable=R0902
         :type user_agent: str
         :param accept_header: The accept header string to use or ""
         :type accept_header: str
+        :param custom_additional_headers: Additional custom headers, in the format Foo: Bar; Foo2: Bar2; or ""
+        :type custom_additional_headers: str
         """
         if user_name != "" and password != "":
             passman = HTTPPasswordMgrWithDefaultRealm()
@@ -138,6 +141,8 @@ class CalendarData:  # pylint: disable=R0902
             additional_headers.append(("User-agent", user_agent))
         if accept_header != "":
             additional_headers.append(("Accept", accept_header))
+        if(custom_additional_headers != ""):
+          [additional_headers.append((r[0], r[1])) for r in [r.split(": ") for r in [r for r in custom_additional_headers.split(";")[:-1]]]]
         if len(additional_headers) > 0:
             if self._opener is None:
                 self._opener = build_opener()
