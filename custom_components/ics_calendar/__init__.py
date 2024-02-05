@@ -32,6 +32,7 @@ CONF_USER_AGENT = "user_agent"
 CONF_OFFSET_HOURS = "offset_hours"
 CONF_ACCEPT_HEADER = "accept_header"
 CONF_CONNECTION_TIMEOUT = "connection_timeout"
+CONF_ADDITIONAL_HEADERS = "additional_headers"
 
 CONFIG_SCHEMA = vol.Schema(
     {
@@ -85,6 +86,9 @@ CONFIG_SCHEMA = vol.Schema(
                                     vol.Optional(
                                         CONF_CONNECTION_TIMEOUT, default=None
                                     ): cv.socket_timeout,
+                                    vol.Optional(
+                                        CONF_ADDITIONAL_HEADERS, default=""
+                                    ): cv.string
                                 }
                             )
                         ]

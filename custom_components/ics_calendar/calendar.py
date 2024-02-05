@@ -19,7 +19,7 @@ from homeassistant.const import (
     CONF_PASSWORD,
     CONF_PREFIX,
     CONF_URL,
-    CONF_USERNAME,
+    CONF_USERNAME
 )
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import generate_entity_id
@@ -38,6 +38,7 @@ from . import (
     CONF_OFFSET_HOURS,
     CONF_PARSER,
     CONF_USER_AGENT,
+    CONF_ADDITIONAL_HEADERS
 )
 from .calendardata import CalendarData
 from .filter import Filter
@@ -93,6 +94,7 @@ def setup_platform(
             CONF_OFFSET_HOURS: calendar.get(CONF_OFFSET_HOURS),
             CONF_ACCEPT_HEADER: calendar.get(CONF_ACCEPT_HEADER),
             CONF_CONNECTION_TIMEOUT: calendar.get(CONF_CONNECTION_TIMEOUT),
+            CONF_ADDITIONAL_HEADERS: calendar.get(CONF_ADDITIONAL_HEADERS)
         }
         device_id = f"{device_data[CONF_NAME]}"
         entity_id = generate_entity_id(ENTITY_ID_FORMAT, device_id, hass=hass)
@@ -240,6 +242,7 @@ class ICSCalendarData:  # pylint: disable=R0902
             device_data[CONF_PASSWORD],
             device_data[CONF_USER_AGENT],
             device_data[CONF_ACCEPT_HEADER],
+            device_data[CONF_ADDITIONAL_HEADERS]
         )
 
         self._calendar_data.set_timeout(device_data[CONF_CONNECTION_TIMEOUT])
