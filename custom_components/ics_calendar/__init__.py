@@ -108,7 +108,7 @@ def setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.data.setdefault(DOMAIN, {})
 
     if DOMAIN in config and config[DOMAIN]:
-        load_platform(hass, "sensor", DOMAIN, {}, config)
+        load_platform(hass, PLATFORMS[0], config[DOMAIN], {}, config)
         #hass.helpers.discovery.load_platform(
         #    PLATFORMS[0], DOMAIN, config[DOMAIN], config
         #)
